@@ -1,89 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  --color-primary: #6366f1;
-  --color-surface: #1e1e2e;
-  --color-text: #cdd6f4;
-  --radius-md: 8px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --transition-base: 150ms ease;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --primary:       #8b7cf7;
+  --primary-light: #c4b8fc;
+  --primary-dark:  #6d5ed9;
+  --primary-glow:  rgba(139, 124, 247, 0.12);
+
+  --accent:       #f97316;
+  --accent-light: #fed7aa;
+
+  --bg:             #f4f0ff;
+  --surface:        #ffffff;
+  --border:         rgba(139, 124, 247, 0.18);
+  --border-strong:  rgba(139, 124, 247, 0.35);
+  --border-subtle:  rgba(139, 124, 247, 0.07);
+
+  --text:       #1e1b4b;
+  --text-muted: #6b7280;
+  --text-light: #a0a0b8;
+
+  --success: #10b981;
+  --danger:  #ef4444;
+
+  --col-lavender: #8b7cf7;
+  --col-orange:   #f97316;
+  --col-mint:     #10b981;
+  --col-rose:     #f43f5e;
+  --col-sky:      #0ea5e9;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+
+  --shadow-sm: 0 1px 4px rgba(30, 27, 75, 0.07), 0 1px 2px rgba(30, 27, 75, 0.05);
+  --shadow-md: 0 4px 16px rgba(30, 27, 75, 0.1), 0 2px 6px rgba(30, 27, 75, 0.06);
+  --shadow-lg: 0 12px 32px rgba(30, 27, 75, 0.15), 0 4px 10px rgba(30, 27, 75, 0.08);
+
+  --transition: 180ms ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
+  min-height: 100vh;
   font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  font-family: var(--font);
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 700px 500px at 8%  15%, rgba(139, 124, 247, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 550px 650px at 88% 10%, rgba(249, 115,  22, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 800px 500px at 55% 80%, rgba(167, 139, 250, 0.14) 0%, transparent 65%),
+    radial-gradient(ellipse 450px 450px at 95% 75%, rgba(249, 115,  22, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 400px at 30% 55%, rgba(196, 184, 252, 0.10) 0%, transparent 55%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+button {
+  font-family: var(--font);
+}
+
+input,
+textarea {
+  font-family: var(--font);
 }
