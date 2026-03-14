@@ -2,9 +2,7 @@ import { useTodos } from '../../hooks/useTodos';
 import { useIsFiltered } from '../../hooks/useFilteredTodos';
 import { useTodoCardDnd } from '../../hooks/useTodoCardDnd';
 import { useInlineEdit } from '../../hooks/useInlineEdit';
-import { Checkbox } from '../ui/Checkbox';
-import { TodoCardActions } from './TodoCardActions';
-import { HighlightedText } from './HighlightedText';
+import { TodoCardView } from './TodoCardView';
 import type { Todo } from '../../types';
 import styles from './TodoCard.module.css';
 
@@ -51,53 +49,33 @@ export function TodoCard({ todo }: TodoCardProps) {
     .filter(Boolean)
     .join(' ');
 
+  const handleToggleSelect = () => {
+    dispatch({ type: 'TOGGLE_SELECT_TODO', payload: { id: todo.id } });
+  };
+
+  const handleDraftValueChange = (value: string) => {
+    setDraftValue(value);
+  };
+
+  const handleEditKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    handleKeyDown(e, true);
+  };
+
   return (
-    <div ref={cardRef} className={cardClass} data-todo-id={todo.id}>
-      <div className={styles.header}>
-        <Checkbox
-          size="sm"
-          checked={isSelected}
-          onChange={() =>
-            dispatch({ type: 'TOGGLE_SELECT_TODO', payload: { id: todo.id } })
-          }
-        />
-
-        {isEditing ? (
-          <textarea
-            ref={inputRef}
-            className={styles.editInput}
-            value={draftValue}
-            onChange={(e) => setDraftValue(e.target.value)}
-            onBlur={commitEdit}
-            onKeyDown={(e) => handleKeyDown(e, true)}
-            rows={2}
-            aria-label="Edit task"
-          />
-        ) : (
-          <span
-            className={styles.text}
-            onDoubleClick={startEdit}
-            title="Double-click to edit"
-          >
-            <HighlightedText text={todo.text} />
-          </span>
-        )}
-
-        <TodoCardActions todo={todo} isEditing={isEditing} onEdit={startEdit} />
-      </div>
-
-      {!isFiltered && (
-        <div className={styles.dragHandle} aria-hidden="true">
-          <svg viewBox="0 0 16 16" fill="none">
-            <circle cx="5" cy="4" r="1.2" fill="currentColor" />
-            <circle cx="5" cy="8" r="1.2" fill="currentColor" />
-            <circle cx="5" cy="12" r="1.2" fill="currentColor" />
-            <circle cx="11" cy="4" r="1.2" fill="currentColor" />
-            <circle cx="11" cy="8" r="1.2" fill="currentColor" />
-            <circle cx="11" cy="12" r="1.2" fill="currentColor" />
-          </svg>
-        </div>
-      )}
-    </div>
+    <TodoCardView
+      todo={todo}
+      cardRef={cardRef}
+      cardClass={cardClass}
+      isSelected={isSelected}
+      isFiltered={isFiltered}
+      isEditing={isEditing}
+      draftValue={draftValue}
+      inputRef={inputRef}
+      onToggleSelect={handleToggleSelect}
+      onDraftValueChange={handleDraftValueChange}
+      onStartEdit={startEdit}
+      onCommitEdit={commitEdit}
+      onEditKeyDown={handleEditKeyDown}
+    />
   );
 }
