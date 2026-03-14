@@ -22,6 +22,8 @@ export const SearchBar = () => {
         />
       </svg>
       <input
+        id="task-search"
+        name="task-search"
         className={styles.searchInput}
         type="search"
         placeholder="Search tasks..."
