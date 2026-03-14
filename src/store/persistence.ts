@@ -7,7 +7,10 @@ export function loadState(): AppState | null {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw) as AppState;
   } catch (error) {
-    console.error(`Error loading from localStorage key "${STORAGE_KEY}":`, error);
+    console.error(
+      `Error loading from localStorage key "${STORAGE_KEY}":`,
+      error
+    );
   }
   return null;
 }

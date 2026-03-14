@@ -24,18 +24,29 @@ export function TodoCard({ todo }: TodoCardProps) {
 
   const { cardRef, dragState } = useTodoCardDnd(todo, isFiltered);
 
-  const { isEditing, draftValue, setDraftValue, inputRef, startEdit, commitEdit, handleKeyDown } =
-    useInlineEdit<HTMLTextAreaElement>(todo.text, (newText) =>
-      dispatch({ type: 'EDIT_TODO', payload: { id: todo.id, text: newText } }),
-    );
+  const {
+    isEditing,
+    draftValue,
+    setDraftValue,
+    inputRef,
+    startEdit,
+    commitEdit,
+    handleKeyDown,
+  } = useInlineEdit<HTMLTextAreaElement>(todo.text, (newText) =>
+    dispatch({ type: 'EDIT_TODO', payload: { id: todo.id, text: newText } })
+  );
 
   const cardClass = [
     styles.card,
     todo.completed ? styles.completed : '',
     isSelected ? styles.selected : '',
     dragState.type === 'dragging' ? styles.dragging : '',
-    dragState.type === 'over' && dragState.closestEdge === 'top' ? styles.overTop : '',
-    dragState.type === 'over' && dragState.closestEdge === 'bottom' ? styles.overBottom : '',
+    dragState.type === 'over' && dragState.closestEdge === 'top'
+      ? styles.overTop
+      : '',
+    dragState.type === 'over' && dragState.closestEdge === 'bottom'
+      ? styles.overBottom
+      : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -46,7 +57,9 @@ export function TodoCard({ todo }: TodoCardProps) {
         <Checkbox
           size="sm"
           checked={isSelected}
-          onChange={() => dispatch({ type: 'TOGGLE_SELECT_TODO', payload: { id: todo.id } })}
+          onChange={() =>
+            dispatch({ type: 'TOGGLE_SELECT_TODO', payload: { id: todo.id } })
+          }
         />
 
         {isEditing ? (
@@ -61,7 +74,11 @@ export function TodoCard({ todo }: TodoCardProps) {
             aria-label="Edit task"
           />
         ) : (
-          <span className={styles.text} onDoubleClick={startEdit} title="Double-click to edit">
+          <span
+            className={styles.text}
+            onDoubleClick={startEdit}
+            title="Double-click to edit"
+          >
             <HighlightedText text={todo.text} />
           </span>
         )}

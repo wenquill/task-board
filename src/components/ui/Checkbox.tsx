@@ -8,7 +8,13 @@ interface CheckboxProps {
   size?: 'sm' | 'md';
 }
 
-export function Checkbox({ checked, onChange, label, indeterminate = false, size = 'md' }: CheckboxProps) {
+export function Checkbox({
+  checked,
+  onChange,
+  label,
+  indeterminate = false,
+  size = 'md',
+}: CheckboxProps) {
   return (
     <label className={`${styles.wrapper} ${styles[size]}`}>
       <span
@@ -26,11 +32,25 @@ export function Checkbox({ checked, onChange, label, indeterminate = false, size
       >
         {indeterminate ? (
           <svg viewBox="0 0 12 12" fill="none">
-            <line x1="2" y1="6" x2="10" y2="6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <line
+              x1="2"
+              y1="6"
+              x2="10"
+              y2="6"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </svg>
         ) : checked ? (
           <svg viewBox="0 0 12 12" fill="none">
-            <polyline points="2,6 5,9 10,3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <polyline
+              points="2,6 5,9 10,3"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         ) : null}
       </span>

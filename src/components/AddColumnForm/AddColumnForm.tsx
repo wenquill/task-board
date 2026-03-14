@@ -38,9 +38,18 @@ export function AddColumnForm() {
 
   if (!isOpen) {
     return (
-      <button className={styles.addColumnBtn} onClick={open} aria-label="Add new column">
+      <button
+        className={styles.addColumnBtn}
+        onClick={open}
+        aria-label="Add new column"
+      >
         <svg viewBox="0 0 20 20" fill="none">
-          <path d="M10 2v16M2 10h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <path
+            d="M10 2v16M2 10h16"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
         </svg>
         Add column
       </button>
@@ -60,7 +69,11 @@ export function AddColumnForm() {
         maxLength={50}
       />
       <div className={styles.addColumnActions}>
-        <button className={styles.addColSubmit} onClick={submit} disabled={!title.trim()}>
+        <button
+          className={styles.addColSubmit}
+          onClick={submit}
+          disabled={!title.trim()}
+        >
           Add
         </button>
         <button className={styles.addColCancel} onClick={cancel}>

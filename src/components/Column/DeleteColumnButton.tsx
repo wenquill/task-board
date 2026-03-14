@@ -21,11 +21,16 @@ export function DeleteColumnButton({ columnId }: DeleteColumnButtonProps) {
         <span>Delete?</span>
         <button
           className={styles.confirmYes}
-          onClick={() => dispatch({ type: 'DELETE_COLUMN', payload: { id: columnId } })}
+          onClick={() =>
+            dispatch({ type: 'DELETE_COLUMN', payload: { id: columnId } })
+          }
         >
           Yes
         </button>
-        <button className={styles.confirmNo} onClick={() => setShowConfirm(false)}>
+        <button
+          className={styles.confirmNo}
+          onClick={() => setShowConfirm(false)}
+        >
           No
         </button>
       </div>

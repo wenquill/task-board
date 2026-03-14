@@ -42,7 +42,9 @@ export function AddTodoForm({ columnId }: AddTodoFormProps) {
     }
   };
 
-  return !open ? <AddTaskButton handleOpen={handleOpen}/> : (
+  return !open ? (
+    <AddTaskButton handleOpen={handleOpen} />
+  ) : (
     <div className={styles.form}>
       <textarea
         ref={inputRef}
@@ -55,7 +57,11 @@ export function AddTodoForm({ columnId }: AddTodoFormProps) {
         aria-label="New task text"
       />
       <div className={styles.formActions}>
-        <button className={styles.submitBtn} onClick={handleSubmit} disabled={!text.trim()}>
+        <button
+          className={styles.submitBtn}
+          onClick={handleSubmit}
+          disabled={!text.trim()}
+        >
           Add task
         </button>
         <button

@@ -8,7 +8,10 @@ interface MoveToMenuProps {
 }
 
 /** Dropdown list of columns the user can bulk-move selected tasks into. */
-export const MoveToMenu = memo(function MoveToMenu({ columns, onSelect }: MoveToMenuProps) {
+export const MoveToMenu = memo(function MoveToMenu({
+  columns,
+  onSelect,
+}: MoveToMenuProps) {
   return (
     <ul className={styles.moveMenu} role="listbox">
       {columns.map((col) => (

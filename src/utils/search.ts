@@ -12,7 +12,10 @@ export function matchesSearch(text: string, query: string): boolean {
   const q = query.trim();
   if (!q) return true;
   const lower = text.toLowerCase();
-  return q.toLowerCase().split(/\s+/).every((word) => lower.includes(word));
+  return q
+    .toLowerCase()
+    .split(/\s+/)
+    .every((word) => lower.includes(word));
 }
 
 /**
@@ -20,7 +23,10 @@ export function matchesSearch(text: string, query: string): boolean {
  * Any substring that matches a word from `query` becomes a highlighted segment.
  * Overlapping matches are merged so no character appears twice.
  */
-export function getHighlightSegments(text: string, query: string): TextSegment[] {
+export function getHighlightSegments(
+  text: string,
+  query: string
+): TextSegment[] {
   const q = query.trim();
   if (!q) return [{ text, highlighted: false }];
 
@@ -52,11 +58,13 @@ export function getHighlightSegments(text: string, query: string): TextSegment[]
   const segments: TextSegment[] = [];
   let pos = 0;
   for (const [start, end] of merged) {
-    if (pos < start) segments.push({ text: text.slice(pos, start), highlighted: false });
+    if (pos < start)
+      segments.push({ text: text.slice(pos, start), highlighted: false });
     segments.push({ text: text.slice(start, end), highlighted: true });
     pos = end;
   }
-  if (pos < text.length) segments.push({ text: text.slice(pos), highlighted: false });
+  if (pos < text.length)
+    segments.push({ text: text.slice(pos), highlighted: false });
 
   return segments;
 }

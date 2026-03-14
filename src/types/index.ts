@@ -6,7 +6,13 @@ export interface Todo {
   columnId: string;
 }
 
-export const COLUMN_COLORS = ['lavender', 'orange', 'mint', 'rose', 'sky'] as const;
+export const COLUMN_COLORS = [
+  'lavender',
+  'orange',
+  'mint',
+  'rose',
+  'sky',
+] as const;
 export type ColumnColor = (typeof COLUMN_COLORS)[number];
 
 export interface Column {
@@ -34,14 +40,20 @@ export type Action =
   | { type: 'EDIT_TODO'; payload: { id: string; text: string } }
   | { type: 'TOGGLE_TODO'; payload: { id: string } }
   | { type: 'SET_COMPLETED_SELECTED'; payload: { completed: boolean } }
-  | { type: 'MOVE_TODO'; payload: { todoId: string; toColumnId: string; toIndex: number } }
+  | {
+      type: 'MOVE_TODO';
+      payload: { todoId: string; toColumnId: string; toIndex: number };
+    }
   | { type: 'MOVE_SELECTED_TO_COLUMN'; payload: { columnId: string } }
   | { type: 'ADD_COLUMN'; payload: { title: string } }
   | { type: 'DELETE_COLUMN'; payload: { id: string } }
   | { type: 'RENAME_COLUMN'; payload: { id: string; title: string } }
   | { type: 'REORDER_COLUMN'; payload: { fromIndex: number; toIndex: number } }
   | { type: 'TOGGLE_SELECT_TODO'; payload: { id: string } }
-  | { type: 'SELECT_ALL_IN_COLUMN'; payload: { columnId: string; todoIds: string[] } }
+  | {
+      type: 'SELECT_ALL_IN_COLUMN';
+      payload: { columnId: string; todoIds: string[] };
+    }
   | { type: 'DESELECT_ALL' }
   | { type: 'SET_FILTER'; payload: FilterStatus }
   | { type: 'SET_SEARCH'; payload: string };

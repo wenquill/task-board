@@ -28,8 +28,12 @@ export function Column({ column }: ColumnProps) {
     styles.column,
     styles[column.color],
     dragState.type === 'dragging' ? styles.dragging : '',
-    dragState.type === 'over-col' && dragState.closestEdge === 'left' ? styles.overLeft : '',
-    dragState.type === 'over-col' && dragState.closestEdge === 'right' ? styles.overRight : '',
+    dragState.type === 'over-col' && dragState.closestEdge === 'left'
+      ? styles.overLeft
+      : '',
+    dragState.type === 'over-col' && dragState.closestEdge === 'right'
+      ? styles.overRight
+      : '',
     dragState.type === 'over-list' ? styles.overList : '',
   ]
     .filter(Boolean)

@@ -12,7 +12,10 @@ import { useEffect, useState } from 'react';
  * @param key           The localStorage key to read/write.
  * @param defaultValue  Fallback used when no stored value exists yet.
  */
-export function useLocalStorage<T>(key: string, defaultValue: T): [T, (value: T) => void] {
+export function useLocalStorage<T>(
+  key: string,
+  defaultValue: T
+): [T, (value: T) => void] {
   const [value, setValue] = useState<T>(() => {
     try {
       const stored = localStorage.getItem(key);

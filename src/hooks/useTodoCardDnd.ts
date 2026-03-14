@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
+import {
+  draggable,
+  dropTargetForElements,
+} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import {
+  attachClosestEdge,
+  extractClosestEdge,
+} from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 import type { Edge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
 import type { Todo } from '../types';
@@ -42,15 +48,18 @@ export function useTodoCardDnd(todo: Todo, isFiltered: boolean) {
         getData: ({ input, element }) =>
           attachClosestEdge(
             { type: 'todo-target', todoId: todo.id, columnId: todo.columnId },
-            { input, element, allowedEdges: ['top', 'bottom'] },
+            { input, element, allowedEdges: ['top', 'bottom'] }
           ),
         canDrop: ({ source }) =>
           source.data.type === 'todo' && source.data.todoId !== todo.id,
         onDrag: ({ self }) =>
-          setDragState({ type: 'over', closestEdge: extractClosestEdge(self.data) }),
+          setDragState({
+            type: 'over',
+            closestEdge: extractClosestEdge(self.data),
+          }),
         onDragLeave: () => setDragState({ type: 'idle' }),
         onDrop: () => setDragState({ type: 'idle' }),
-      }),
+      })
     );
   }, [todo.id, todo.columnId, isFiltered]);
 

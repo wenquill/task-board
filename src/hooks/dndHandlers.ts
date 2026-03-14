@@ -15,7 +15,7 @@ export function handleTodoDrop(
   src: DragData,
   targets: Array<{ data: DragData }>,
   state: AppState,
-  dispatch: React.Dispatch<Action>,
+  dispatch: React.Dispatch<Action>
 ): void {
   const todoId = src.todoId as string;
   const fromColumnId = src.columnId as string;
@@ -55,7 +55,10 @@ export function handleTodoDrop(
     const column = state.columns[toColumnId];
     if (!column) return;
 
-    dispatch({ type: 'MOVE_TODO', payload: { todoId, toColumnId, toIndex: column.todoIds.length } });
+    dispatch({
+      type: 'MOVE_TODO',
+      payload: { todoId, toColumnId, toIndex: column.todoIds.length },
+    });
   }
 }
 
@@ -67,7 +70,7 @@ export function handleColumnDrop(
   src: DragData,
   targets: Array<{ data: DragData }>,
   state: AppState,
-  dispatch: React.Dispatch<Action>,
+  dispatch: React.Dispatch<Action>
 ): void {
   const colTarget = targets.find((t) => t.data.type === 'column-target');
   if (!colTarget) return;
@@ -104,7 +107,10 @@ export function handleColumnDrop(
  *   insert at 3              →  [B, C, D, A]  ← wrong, A skipped over D
  *   subtract 1 (0 < 3)       →  insert at 2  →  [B, C, A, D]  ✓
  */
-export function insertIndexAfterRemoval(fromIndex: number, rawInsertAt: number): number | null {
+export function insertIndexAfterRemoval(
+  fromIndex: number,
+  rawInsertAt: number
+): number | null {
   const adjusted = fromIndex < rawInsertAt ? rawInsertAt - 1 : rawInsertAt;
   return adjusted === fromIndex ? null : adjusted;
 }

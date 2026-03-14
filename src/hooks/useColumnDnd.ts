@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { draggable, dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { attachClosestEdge, extractClosestEdge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
+import {
+  draggable,
+  dropTargetForElements,
+} from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
+import {
+  attachClosestEdge,
+  extractClosestEdge,
+} from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 import type { Edge } from '@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge';
 import { combine } from '@atlaskit/pragmatic-drag-and-drop/combine';
 
@@ -45,12 +51,15 @@ export function useColumnDnd(columnId: string) {
         getData: ({ input, element }) =>
           attachClosestEdge(
             { type: 'column-target', columnId },
-            { input, element, allowedEdges: ['left', 'right'] },
+            { input, element, allowedEdges: ['left', 'right'] }
           ),
         canDrop: ({ source }) =>
           source.data.type === 'column' && source.data.columnId !== columnId,
         onDrag: ({ self }) =>
-          setDragState({ type: 'over-col', closestEdge: extractClosestEdge(self.data) }),
+          setDragState({
+            type: 'over-col',
+            closestEdge: extractClosestEdge(self.data),
+          }),
         onDragLeave: () => setDragState({ type: 'idle' }),
         onDrop: () => setDragState({ type: 'idle' }),
       }),
@@ -62,9 +71,11 @@ export function useColumnDnd(columnId: string) {
         getIsSticky: () => true,
         onDragEnter: () => setDragState({ type: 'over-list' }),
         onDragLeave: () =>
-          setDragState((prev) => (prev.type === 'over-list' ? { type: 'idle' } : prev)),
+          setDragState((prev) =>
+            prev.type === 'over-list' ? { type: 'idle' } : prev
+          ),
         onDrop: () => setDragState({ type: 'idle' }),
-      }),
+      })
     );
   }, [columnId]);
 

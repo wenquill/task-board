@@ -13,5 +13,9 @@ export function TodosProvider({ children }: { children: ReactNode }) {
     saveState(state);
   }, [state]);
 
-  return <TodosContext.Provider value={{ state, dispatch }}>{children}</TodosContext.Provider>;
+  return (
+    <TodosContext.Provider value={{ state, dispatch }}>
+      {children}
+    </TodosContext.Provider>
+  );
 }

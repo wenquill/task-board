@@ -29,7 +29,7 @@ export function HighlightedText({ text }: HighlightedTextProps) {
           </mark>
         ) : (
           <span key={i}>{seg.text}</span>
-        ),
+        )
       )}
     </>
   );

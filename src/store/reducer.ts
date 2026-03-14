@@ -1,7 +1,12 @@
 import type { AppState, Action } from '../types';
 import { COLUMN_COLORS } from '../types';
 import { generateId } from './initialState';
-import { moveBetweenColumns, reassignColumnId, removeFromSourceColumns, reorderWithinColumn } from './utils';
+import {
+  moveBetweenColumns,
+  reassignColumnId,
+  removeFromSourceColumns,
+  reorderWithinColumn,
+} from './utils';
 
 export { initialState } from './initialState';
 
@@ -10,7 +15,13 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'ADD_TODO': {
       const { text, columnId } = action.payload;
       const id = generateId();
-      const todo = { id, text, completed: false, createdAt: Date.now(), columnId };
+      const todo = {
+        id,
+        text,
+        completed: false,
+        createdAt: Date.now(),
+        columnId,
+      };
       const column = state.columns[columnId];
       if (!column) return state;
 
@@ -29,7 +40,7 @@ export function reducer(state: AppState, action: Action): AppState {
       const todo = state.todos[id];
       if (!todo) return state;
       const remainingTodos = Object.fromEntries(
-        Object.entries(state.todos).filter(([tid]) => tid !== id),
+        Object.entries(state.todos).filter(([tid]) => tid !== id)
       );
       const column = state.columns[todo.columnId];
 
@@ -52,16 +63,21 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'DELETE_SELECTED': {
       const idsToDelete = new Set(state.selectedTodoIds);
       const remainingTodos = Object.fromEntries(
-        Object.entries(state.todos).filter(([id]) => !idsToDelete.has(id)),
+        Object.entries(state.todos).filter(([id]) => !idsToDelete.has(id))
       );
       const updatedColumns = Object.fromEntries(
         Object.entries(state.columns).map(([colId, col]) => [
           colId,
           { ...col, todoIds: col.todoIds.filter((id) => !idsToDelete.has(id)) },
-        ]),
+        ])
       );
 
-      return { ...state, todos: remainingTodos, columns: updatedColumns, selectedTodoIds: [] };
+      return {
+        ...state,
+        todos: remainingTodos,
+        columns: updatedColumns,
+        selectedTodoIds: [],
+      };
     }
 
     case 'EDIT_TODO': {
@@ -79,7 +95,10 @@ export function reducer(state: AppState, action: Action): AppState {
 
       return {
         ...state,
-        todos: { ...state.todos, [id]: { ...todo, completed: !todo.completed } },
+        todos: {
+          ...state.todos,
+          [id]: { ...todo, completed: !todo.completed },
+        },
       };
     }
 
@@ -108,7 +127,14 @@ export function reducer(state: AppState, action: Action): AppState {
 
       return isSameColumn
         ? reorderWithinColumn(state, todoId, sourceColumn, toIndex)
-        : moveBetweenColumns(state, todoId, todo, sourceColumn, destColumn, toIndex);
+        : moveBetweenColumns(
+            state,
+            todoId,
+            todo,
+            sourceColumn,
+            destColumn,
+            toIndex
+          );
     }
 
     case 'MOVE_SELECTED_TO_COLUMN': {
@@ -119,18 +145,36 @@ export function reducer(state: AppState, action: Action): AppState {
         .filter((id) => state.todos[id])
         .map((id) => state.todos[id]);
 
-      const columnsAfterRemoval = removeFromSourceColumns(state.columns, todosToMove, destColumnId);
-      const updatedTodos = reassignColumnId(state.todos, todosToMove, destColumnId);
+      const columnsAfterRemoval = removeFromSourceColumns(
+        state.columns,
+        todosToMove,
+        destColumnId
+      );
+      const updatedTodos = reassignColumnId(
+        state.todos,
+        todosToMove,
+        destColumnId
+      );
 
-      const todosArrivingFromElsewhere = todosToMove.filter((t) => t.columnId !== destColumnId);
+      const todosArrivingFromElsewhere = todosToMove.filter(
+        (t) => t.columnId !== destColumnId
+      );
       const arrivingIds = todosArrivingFromElsewhere.map((t) => t.id);
       const destColumn = columnsAfterRemoval[destColumnId];
       const updatedColumns = {
         ...columnsAfterRemoval,
-        [destColumnId]: { ...destColumn, todoIds: [...destColumn.todoIds, ...arrivingIds] },
+        [destColumnId]: {
+          ...destColumn,
+          todoIds: [...destColumn.todoIds, ...arrivingIds],
+        },
       };
 
-      return { ...state, todos: updatedTodos, columns: updatedColumns, selectedTodoIds: [] };
+      return {
+        ...state,
+        todos: updatedTodos,
+        columns: updatedColumns,
+        selectedTodoIds: [],
+      };
     }
 
     case 'ADD_COLUMN': {
@@ -153,10 +197,12 @@ export function reducer(state: AppState, action: Action): AppState {
       const column = state.columns[id];
       if (!column) return state;
       const remainingTodos = Object.fromEntries(
-        Object.entries(state.todos).filter(([tid]) => !column.todoIds.includes(tid)),
+        Object.entries(state.todos).filter(
+          ([tid]) => !column.todoIds.includes(tid)
+        )
       );
       const remainingColumns = Object.fromEntries(
-        Object.entries(state.columns).filter(([colId]) => colId !== id),
+        Object.entries(state.columns).filter(([colId]) => colId !== id)
       );
 
       return {
@@ -164,7 +210,9 @@ export function reducer(state: AppState, action: Action): AppState {
         todos: remainingTodos,
         columns: remainingColumns,
         columnOrder: state.columnOrder.filter((cid) => cid !== id),
-        selectedTodoIds: state.selectedTodoIds.filter((sid) => !column.todoIds.includes(sid)),
+        selectedTodoIds: state.selectedTodoIds.filter(
+          (sid) => !column.todoIds.includes(sid)
+        ),
       };
     }
 
@@ -203,12 +251,15 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'SELECT_ALL_IN_COLUMN': {
       const { todoIds } = action.payload;
       const currentSet = new Set(state.selectedTodoIds);
-      const allAlreadySelected = todoIds.length > 0 && todoIds.every((id) => currentSet.has(id));
+      const allAlreadySelected =
+        todoIds.length > 0 && todoIds.every((id) => currentSet.has(id));
 
       if (allAlreadySelected) {
         return {
           ...state,
-          selectedTodoIds: state.selectedTodoIds.filter((id) => !todoIds.includes(id)),
+          selectedTodoIds: state.selectedTodoIds.filter(
+            (id) => !todoIds.includes(id)
+          ),
         };
       }
 

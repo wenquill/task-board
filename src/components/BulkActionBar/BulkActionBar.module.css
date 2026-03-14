@@ -169,11 +169,21 @@
   flex-shrink: 0;
 }
 
-.colorDot.lavender { background: var(--col-lavender); }
-.colorDot.orange   { background: var(--col-orange); }
-.colorDot.mint     { background: var(--col-mint); }
-.colorDot.rose     { background: var(--col-rose); }
-.colorDot.sky      { background: var(--col-sky); }
+.colorDot.lavender {
+  background: var(--col-lavender);
+}
+.colorDot.orange {
+  background: var(--col-orange);
+}
+.colorDot.mint {
+  background: var(--col-mint);
+}
+.colorDot.rose {
+  background: var(--col-rose);
+}
+.colorDot.sky {
+  background: var(--col-sky);
+}
 
 .dismiss {
   background: none;

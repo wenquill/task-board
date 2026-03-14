@@ -20,8 +20,12 @@ interface ColumnHeaderProps {
 export function ColumnHeader({ column, filteredTodoIds }: ColumnHeaderProps) {
   const { state, dispatch } = useTodos();
 
-  const selectedInColumn = filteredTodoIds.filter((id) => state.selectedTodoIds.includes(id));
-  const allSelected = filteredTodoIds.length > 0 && selectedInColumn.length === filteredTodoIds.length;
+  const selectedInColumn = filteredTodoIds.filter((id) =>
+    state.selectedTodoIds.includes(id)
+  );
+  const allSelected =
+    filteredTodoIds.length > 0 &&
+    selectedInColumn.length === filteredTodoIds.length;
   const someSelected = selectedInColumn.length > 0 && !allSelected;
 
   return (

@@ -55,11 +55,15 @@
 }
 
 .overTop {
-  box-shadow: 0 -3px 0 0 var(--primary), var(--shadow-sm);
+  box-shadow:
+    0 -3px 0 0 var(--primary),
+    var(--shadow-sm);
 }
 
 .overBottom {
-  box-shadow: 0 3px 0 0 var(--primary), var(--shadow-sm);
+  box-shadow:
+    0 3px 0 0 var(--primary),
+    var(--shadow-sm);
 }
 
 .header {

@@ -12,7 +12,7 @@ export function BulkActionBar() {
   // Memoised so MoveToMenu receives a stable array reference between renders.
   const columns = useMemo(
     () => state.columnOrder.map((id) => state.columns[id]).filter(Boolean),
-    [state.columnOrder, state.columns],
+    [state.columnOrder, state.columns]
   );
 
   // Stable callback so MoveToMenu can skip re-renders when the menu is closed.
@@ -21,7 +21,7 @@ export function BulkActionBar() {
       dispatch({ type: 'MOVE_SELECTED_TO_COLUMN', payload: { columnId } });
       setMoveMenuOpen(false);
     },
-    [dispatch],
+    [dispatch]
   );
 
   if (count === 0) return null;
@@ -36,22 +36,44 @@ export function BulkActionBar() {
         <div className={styles.actions}>
           <button
             className={`${styles.btn} ${styles.success}`}
-            onClick={() => dispatch({ type: 'SET_COMPLETED_SELECTED', payload: { completed: true } })}
+            onClick={() =>
+              dispatch({
+                type: 'SET_COMPLETED_SELECTED',
+                payload: { completed: true },
+              })
+            }
             title="Mark as complete"
           >
             <svg viewBox="0 0 16 16" fill="none">
-              <polyline points="2,8 6,12 14,4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <polyline
+                points="2,8 6,12 14,4"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             <span className={styles.btnLabel}>Complete</span>
           </button>
 
           <button
             className={`${styles.btn} ${styles.neutral}`}
-            onClick={() => dispatch({ type: 'SET_COMPLETED_SELECTED', payload: { completed: false } })}
+            onClick={() =>
+              dispatch({
+                type: 'SET_COMPLETED_SELECTED',
+                payload: { completed: false },
+              })
+            }
             title="Mark as incomplete"
           >
             <svg viewBox="0 0 16 16" fill="none">
-              <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
+              <circle
+                cx="8"
+                cy="8"
+                r="6"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
             </svg>
             <span className={styles.btnLabel}>Incomplete</span>
           </button>
@@ -64,14 +86,27 @@ export function BulkActionBar() {
               aria-expanded={moveMenuOpen}
             >
               <svg viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
               <span className={styles.btnLabel}>Move to</span>
               <svg className={styles.chevron} viewBox="0 0 10 6" fill="none">
-                <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path
+                  d="M1 1l4 4 4-4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
             </button>
-            {moveMenuOpen && <MoveToMenu columns={columns} onSelect={handleMoveSelect} />}
+            {moveMenuOpen && (
+              <MoveToMenu columns={columns} onSelect={handleMoveSelect} />
+            )}
           </div>
 
           <button
@@ -80,7 +115,13 @@ export function BulkActionBar() {
             title="Delete selected"
           >
             <svg viewBox="0 0 16 16" fill="none">
-              <path d="M3 4h10M6 4V2h4v2M5 4l.5 9h5L11 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M3 4h10M6 4V2h4v2M5 4l.5 9h5L11 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             <span className={styles.btnLabel}>Delete</span>
           </button>

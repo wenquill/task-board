@@ -10,7 +10,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
  */
 export function useInlineEdit<T extends HTMLInputElement | HTMLTextAreaElement>(
   currentValue: string,
-  onCommit: (value: string) => void,
+  onCommit: (value: string) => void
 ) {
   const [isEditing, setIsEditing] = useState(false);
   const [draftValue, setDraftValue] = useState(currentValue);

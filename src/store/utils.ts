@@ -7,7 +7,7 @@ import type { AppState, Column, Todo } from '../types';
 export function removeFromSourceColumns(
   columns: AppState['columns'],
   todosToMove: Todo[],
-  destColumnId: string,
+  destColumnId: string
 ): AppState['columns'] {
   const result = { ...columns };
 
@@ -32,10 +32,10 @@ export function removeFromSourceColumns(
 export function reassignColumnId(
   todos: AppState['todos'],
   todosToMove: Todo[],
-  destColumnId: string,
+  destColumnId: string
 ): AppState['todos'] {
   const updates = Object.fromEntries(
-    todosToMove.map((todo) => [todo.id, { ...todo, columnId: destColumnId }]),
+    todosToMove.map((todo) => [todo.id, { ...todo, columnId: destColumnId }])
   );
   return { ...todos, ...updates };
 }
@@ -48,7 +48,7 @@ export function reorderWithinColumn(
   state: AppState,
   todoId: string,
   column: Column,
-  toIndex: number,
+  toIndex: number
 ): AppState {
   const reordered = [...column.todoIds];
   const currentIndex = reordered.indexOf(todoId);
@@ -77,7 +77,7 @@ export function moveBetweenColumns(
   todo: Todo,
   sourceColumn: Column,
   destColumn: Column,
-  toIndex: number,
+  toIndex: number
 ): AppState {
   const sourceIds = sourceColumn.todoIds.filter((id) => id !== todoId);
   const destIds = [...destColumn.todoIds];

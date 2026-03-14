@@ -16,10 +16,20 @@ interface ColumnTitleProps {
 export function ColumnTitle({ column, taskCount }: ColumnTitleProps) {
   const { dispatch } = useTodos();
 
-  const { isEditing, draftValue, setDraftValue, inputRef, startEdit, commitEdit, handleKeyDown } =
-    useInlineEdit<HTMLInputElement>(column.title, (newTitle) =>
-      dispatch({ type: 'RENAME_COLUMN', payload: { id: column.id, title: newTitle } }),
-    );
+  const {
+    isEditing,
+    draftValue,
+    setDraftValue,
+    inputRef,
+    startEdit,
+    commitEdit,
+    handleKeyDown,
+  } = useInlineEdit<HTMLInputElement>(column.title, (newTitle) =>
+    dispatch({
+      type: 'RENAME_COLUMN',
+      payload: { id: column.id, title: newTitle },
+    })
+  );
 
   return (
     <div className={styles.headerLeft}>
