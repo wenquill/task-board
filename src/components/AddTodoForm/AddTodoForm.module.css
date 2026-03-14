@@ -1,0 +1,108 @@
+@media (max-width: 540px) {
+  .input,
+  .submitBtn,
+  .cancelBtn {
+    font-size: 16px;
+  }
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+
+.addButton svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.addButton:hover {
+  background: var(--primary-glow);
+  color: var(--primary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  resize: none;
+  font-family: var(--font);
+  line-height: 1.5;
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--text-light);
+}
+
+.formActions {
+  display: flex;
+  gap: 6px;
+}
+
+.submitBtn {
+  padding: 7px 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font);
+}
+
+.cancelBtn:hover {
+  background: var(--border-subtle);
+  color: var(--text);
+}

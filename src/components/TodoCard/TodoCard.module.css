@@ -1,0 +1,197 @@
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 10px 10px 12px;
+  cursor: grab;
+  transition:
+    box-shadow var(--transition),
+    transform var(--transition),
+    border-color var(--transition),
+    opacity var(--transition);
+  animation: cardIn 200ms ease;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  opacity: 0.4;
+  transform: scale(0.98);
+  box-shadow: none !important;
+}
+
+.selected {
+  border-color: var(--primary) !important;
+  background: var(--primary-glow) !important;
+}
+
+.completed {
+  opacity: 0.65;
+}
+
+.completed .text {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+.overTop {
+  box-shadow: 0 -3px 0 0 var(--primary), var(--shadow-sm);
+}
+
+.overBottom {
+  box-shadow: 0 3px 0 0 var(--primary), var(--shadow-sm);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  word-break: break-word;
+  cursor: text;
+}
+
+.highlight {
+  background: rgba(139, 124, 247, 0.22);
+  color: var(--text);
+  border-radius: 3px;
+  padding: 1px 2px;
+  font-style: normal;
+}
+
+.editInput {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  background: var(--surface);
+  outline: none;
+  resize: none;
+  font-family: var(--font);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity var(--transition);
+  flex-shrink: 0;
+}
+
+.card:hover .actions,
+.card:focus-within .actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .actions {
+    opacity: 1;
+  }
+
+  .dragHandle {
+    opacity: 0.4;
+  }
+
+  .actionBtn {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 540px) {
+  .text {
+    font-size: 13px;
+  }
+
+  .card {
+    padding: 9px 9px 9px 11px;
+  }
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--text-light);
+  padding: 0;
+}
+
+.actionBtn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.actionBtn:hover {
+  background: var(--border-subtle);
+  color: var(--text);
+}
+
+.complete:hover {
+  color: var(--success) !important;
+}
+
+.delete:hover {
+  color: var(--danger) !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+}
+
+.dragHandle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--border-strong);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+  display: flex;
+}
+
+.dragHandle svg {
+  width: 14px;
+  height: 14px;
+}
+
+.card:hover .dragHandle {
+  opacity: 1;
+}
